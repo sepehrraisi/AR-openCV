@@ -1,12 +1,13 @@
-import  numpy as np
+import numpy as np
 import cv2
 
 stdShape = (275,440)
 
 webCam = cv2.VideoCapture(0)
-imgTarget = cv2.imread("assets\imgTarget.jpg")
+imgTarget = cv2.imread("assets/2.jpg")
 imgTarget = cv2.resize(imgTarget,stdShape)
-displayVid = cv2.VideoCapture("assets\displayVid.mp4")
+# displayVid = cv2.VideoCapture("assets\displayVid.mp4")
+displayImg = cv2.imread("assets/1.jpg")
 
 ORB = cv2.ORB_create(nfeatures=1000)
 keyPoint1, descriptor1 = ORB.detectAndCompute(imgTarget,None)
@@ -17,8 +18,9 @@ while webCam.isOpened():
     
     imgAR  = imgWebcam.copy()
     
-    _ , imgVideo = displayVid.read()
-    imgVideo = cv2.resize(imgVideo, stdShape)
+    # _ , imgVideo = displayVid.read()
+    # imgVideo = cv2.resize(imgVideo, stdShape)
+    imgVideo = cv2.resize(displayImg, stdShape)
 
     bruteForce = cv2.BFMatcher()
     matches = bruteForce.knnMatch(descriptor1,descriptor2,k=2)
